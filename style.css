@@ -1,0 +1,63 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Inter";
+  font-style: normal;
+  background-color: #454545;
+  width: 1200px;
+}
+.wrapper {
+  display: flex;
+}
+
+.wrapper .songImg {
+  background-image: url(./assets/songImg.png);
+  width: 169px;
+  height: 169px;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.playerBody {
+}
+
+.playerBody .songData {
+  display: flex;
+}
+.playerBody .songDataWrapper .songData h1 {
+}
+.playerBody .songDataWrapper .songData p {
+}
+.playerBody .songDataWrapper .spotyfyIcon {
+  background-image: url(./assets/spotifyBtn.png);
+  width: 20px;
+  height: 20px;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.playerBody .songDataWrapper .progressBar {
+}
+.playerBody .songDataWrapper .progressBar .bar {
+}
+.playerBody .songDataWrapper .progressBar .songTime {
+}
+
+.playerBody .songControl {
+}
+.playerBody .songControl .repeatIcon {
+}
+.playerBody .songControl .controlIcons {
+}
+.playerBody .songControl .controlIcons .prevBtn {
+}
+.playerBody .songControl .controlIcons .playPauseBtn {
+}
+.playerBody .songControl .controlIcons .nextBtn {
+}
+
+.playerBody .songControl .likeIcon {
+}
