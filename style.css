@@ -7,5 +7,71 @@ body {
   font-family: "Inter";
   font-style: normal;
   background-color: #454545;
-  width: 1200px;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+.player-wrapper {
+  width: 540px;
+  margin: 0 auto;
+  background-color: #fffef8;
+  border-radius: 15px;
+  display: flex;
+}
+.songImg {
+  background-image: url(./assets/songImg.png);
+  width: 169px;
+  height: 169px;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.songPlayer {
+  display: flex;
+  padding: 18px 0 0 33px;
+}
+.songPlayer .songHeader {
+  width: 305px;
+  display: flex;
+  justify-content: space-between;
+}
+.songHeader__data {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+}
+.songHeader__title {
+  font: 700 18px "Inter";
+  color: black;
+}
+.songHeader__name {
+  font: 400 14px "Inter";
+  color: #454545;
+}
+.songHeader__spotifyBtn {
+  background-image: url(./assets/spotifyBtn.png);
+  width: 20px;
+  height: 20px;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.songControll {
+  display: flex;
+}
+.songControll__repeatBtn {
+  background-image: url(./assets/repeatBtn.png);
+  width: 24px;
+  height: 24px;
+  background-repeat: no-repeat;
+  background-size: contain;
+
+}
+.songControll__prevBtn {
+}
+.songControll__playPauseBtn {
+}
+.songControll__nextBtn {
+}
+.songControll__likeBtn {
 }
