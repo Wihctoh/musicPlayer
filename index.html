@@ -14,36 +14,27 @@
     <title>MusicPlayer</title>
   </head>
   <body>
-    <div class="wrapper">
+    <div class="player-wrapper">
       <div class="songImg"></div>
 
-      <div class="playerBody">
-        <div class="songDataWrapper">
-          <div class="songData">
-            <h1>Song Name</h1>
-            <p>artist</p>
-          </div>
-          <div class="spotyfyIcon"></div>
-
-          <div class="progressBar">
-            <div class="bar"></div>
-            <div class="songTime"></div>
-          </div>
+      <div class="songPlayer">
+        <div class="songHeader">
+          <div class="songHeader__title"></div>
+          <div class="songHeader__name"></div>
         </div>
 
-        <div class="songControl">
-          <div class="repeatIcon"></div>
+        <div class="songHeader__spotifyBtn"></div>
 
-          <div class="controlIcons">
-            <div class="prevBtn"></div>
-            <div class="playPauseBtn"></div>
-            <div class="nextBtn"></div>
-          </div>
-
-          <div class="likeIcon"></div>
+        <div class="songControll">
+          <div class="songControll__repeatBtn"></div>
+          <div class="songControll__prevBtn"></div>
+          <div class="songControll__playPauseBtn"></div>
+          <div class="songControll__nextBtn"></div>
+          <div class="songControll__likeBtn"></div>
         </div>
       </div>
     </div>
+
     <script src="./app.js"></script>
   </body>
 </html>
