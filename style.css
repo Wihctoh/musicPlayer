@@ -21,7 +21,7 @@ body {
   border-radius: 15px;
 }
 .songImg {
-  background-image: url(./assets/soadCover.jpg);
+  background-image: url(./assets/bfmvCover.jpg);
   width: 169px;
   height: 169px;
   background-repeat: no-repeat;
@@ -32,7 +32,7 @@ body {
 .songPlayer {
   display: flex;
   flex-direction: column;
-  row-gap: 27px;
+  row-gap: 23px;
   padding-top: 18px;
 }
 .songHeader {

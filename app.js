@@ -2,6 +2,7 @@ const audio = document.querySelector("audio");
 const artist = document.querySelector(".songHeader__title");
 const songName = document.querySelector(".songHeader__name");
 const songCover = document.querySelector(".songImg");
+const barTime = document.querySelector(".progressBar__time");
 
 const songs = [
   {
@@ -10,6 +11,7 @@ const songs = [
     artist: "Bullet for my Valentine",
     songName: "Tears Dont Fall",
     imgPath: "background-image: url(./assets/bfmvCover.jpg)",
+    duration: "05:48",
   },
   {
     id: 2,
@@ -17,6 +19,7 @@ const songs = [
     artist: "Bring Me The Horizon",
     songName: "Parasite Eve",
     imgPath: "background-image: url(./assets/bmthCover.jpg)",
+    duration: "04:51",
   },
   {
     id: 3,
@@ -24,6 +27,7 @@ const songs = [
     artist: "System of a Down",
     songName: "Chop Suey!",
     imgPath: "background-image: url(./assets/soadCover.jpg)",
+    duration: "03:30",
   },
 ];
 
@@ -37,6 +41,7 @@ document
     artist.innerHTML = songs[currentIndexSong].artist;
     songName.innerHTML = songs[currentIndexSong].songName;
     songCover.style = songs[currentIndexSong].imgPath;
+    barTime.innerHTML = songs[currentIndexSong].duration;
 
     if (!flag) {
       audio.play();
@@ -45,6 +50,7 @@ document
       flag = true;
     } else {
       flag = false;
+
       audio.pause();
       this.style = "background-image: url(./assets/playBtn.svg);";
     }
@@ -58,6 +64,7 @@ document
     artist.innerHTML = songs[currentIndexSong].artist;
     songName.innerHTML = songs[currentIndexSong].songName;
     songCover.style = songs[currentIndexSong].imgPath;
+    barTime.innerHTML = songs[currentIndexSong].duration;
     audio.src = songs[currentIndexSong].path;
     audio.play();
     document.querySelector(".songControll__playPauseBtn").style =
@@ -74,6 +81,7 @@ document
     artist.innerHTML = songs[currentIndexSong].artist;
     songName.innerHTML = songs[currentIndexSong].songName;
     songCover.style = songs[currentIndexSong].imgPath;
+    barTime.innerHTML = songs[currentIndexSong].duration;
     audio.src = songs[currentIndexSong].path;
     audio.play();
     document.querySelector(".songControll__playPauseBtn").style =
