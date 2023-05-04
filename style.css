@@ -11,34 +11,41 @@ body {
   display: flex;
   align-items: center;
 }
+
 .player-wrapper {
   width: 540px;
   margin: 0 auto;
+  display: flex;
+  gap: 32px;
   background-color: #fffef8;
   border-radius: 15px;
-  display: flex;
 }
 .songImg {
-  background-image: url(./assets/songImg.png);
+  background-image: url(./assets/soadCover.jpg);
   width: 169px;
   height: 169px;
   background-repeat: no-repeat;
   background-size: contain;
+  border-radius: 15px 0 0 15px;
 }
-
+/* -------------------Song Data-----------------*/
 .songPlayer {
   display: flex;
-  padding: 18px 0 0 33px;
+  flex-direction: column;
+  row-gap: 27px;
+  padding-top: 18px;
 }
-.songPlayer .songHeader {
+.songHeader {
   width: 305px;
   display: flex;
   justify-content: space-between;
 }
 .songHeader__data {
+  width: 285px;
   display: flex;
   flex-direction: column;
   row-gap: 5px;
+  word-wrap: break-word;
 }
 .songHeader__title {
   font: 700 18px "Inter";
@@ -49,29 +56,72 @@ body {
   color: #454545;
 }
 .songHeader__spotifyBtn {
-  background-image: url(./assets/spotifyBtn.png);
+  background-image: url(./assets/spotifyBtn.svg);
   width: 20px;
   height: 20px;
   background-repeat: no-repeat;
   background-size: contain;
 }
-
+/* -------------------progress bar-----------------*/
+.progressBar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.progressBar__line {
+  background-color: #dadada;
+  width: 257px;
+  height: 3px;
+}
+.progressBar__time {
+  font: 400 12px "Inter";
+}
+/* -------------------Song controll bar-----------------*/
 .songControll {
   display: flex;
+  justify-content: space-between;
 }
 .songControll__repeatBtn {
-  background-image: url(./assets/repeatBtn.png);
+  background-image: url(./assets/repeatBtn.svg);
   width: 24px;
   height: 24px;
   background-repeat: no-repeat;
   background-size: contain;
-
+}
+/* -------------------controll panel-----------------*/
+.songControll-panel {
+  display: flex;
+  gap: 20px;
 }
 .songControll__prevBtn {
+  background-image: url(./assets/prevBtn.svg);
+  width: 24px;
+  height: 24px;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 .songControll__playPauseBtn {
+  background-image: url(./assets/playBtn.svg);
+  width: 24px;
+  height: 24px;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 .songControll__nextBtn {
+  background-image: url(./assets/nextBtn.svg);
+  width: 24px;
+  height: 24px;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
-.songControll__likeBtn {
+.songControll__favBtn {
+  background-image: url(./assets/favBtn.svg);
+  width: 24px;
+  height: 24px;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.asd {
+  background-image: url(./assets/soadCover.jpg);
 }
