@@ -3,6 +3,13 @@ const artist = document.querySelector(".songHeader__title");
 const songName = document.querySelector(".songHeader__name");
 const songCover = document.querySelector(".songImg");
 const barTime = document.querySelector(".progressBar__time");
+const playPauseBtn = document.querySelector(".songControll__playPauseBtn");
+const prevBtn = document.querySelector(".songControll__prevBtn");
+const nextBtn = document.querySelector(".songControll__nextBtn");
+const favBtn = document.querySelector(".songControll__favBtn");
+
+let flag = false;
+let currentIndexSong = 0;
 
 const songs = [
   {
@@ -12,6 +19,7 @@ const songs = [
     songName: "Tears Dont Fall",
     imgPath: "background-image: url(./assets/bfmvCover.jpg)",
     duration: "05:48",
+    liked: "background-image: url(./assets/favBtnUsed.svg)",
   },
   {
     id: 2,
@@ -20,6 +28,7 @@ const songs = [
     songName: "Parasite Eve",
     imgPath: "background-image: url(./assets/bmthCover.jpg)",
     duration: "04:51",
+    liked: "background-image: url(./assets/favBtnUsed.svg)",
   },
   {
     id: 3,
@@ -28,63 +37,52 @@ const songs = [
     songName: "Chop Suey!",
     imgPath: "background-image: url(./assets/soadCover.jpg)",
     duration: "03:30",
+    liked: "background-image: url(./assets/favBtnUsed.svg)",
   },
 ];
 
-let flag = false;
-let currentIndexSong = 0;
+function songInfo() {
+  const currentSong = songs[currentIndexSong];
 
-document
-  .querySelector(".songControll__playPauseBtn")
-  .addEventListener("click", function () {
-    audio.src = songs[currentIndexSong].path;
-    artist.innerHTML = songs[currentIndexSong].artist;
-    songName.innerHTML = songs[currentIndexSong].songName;
-    songCover.style = songs[currentIndexSong].imgPath;
-    barTime.innerHTML = songs[currentIndexSong].duration;
+  audio.src = currentSong.path;
+  artist.innerHTML = currentSong.artist;
+  songName.innerHTML = currentSong.songName;
+  songCover.style = currentSong.imgPath;
+  barTime.innerHTML = currentSong.duration;
+}
 
-    if (!flag) {
-      audio.play();
-      this.style = "background-image: url(./assets/pauseBtn.svg);";
+favBtn.addEventListener("click", function () {
+  this.style = songs[currentIndexSong].liked;
+});
 
-      flag = true;
-    } else {
-      flag = false;
+playPauseBtn.addEventListener("click", function () {
+  songInfo();
 
-      audio.pause();
-      this.style = "background-image: url(./assets/playBtn.svg);";
-    }
-  });
-
-document
-  .querySelector(".songControll__prevBtn")
-  .addEventListener("click", function () {
-    if (currentIndexSong === 0) return;
-    currentIndexSong--;
-    artist.innerHTML = songs[currentIndexSong].artist;
-    songName.innerHTML = songs[currentIndexSong].songName;
-    songCover.style = songs[currentIndexSong].imgPath;
-    barTime.innerHTML = songs[currentIndexSong].duration;
-    audio.src = songs[currentIndexSong].path;
+  if (!flag) {
     audio.play();
-    document.querySelector(".songControll__playPauseBtn").style =
-      "background-image: url(./assets/pauseBtn.svg);";
+    this.style = "background-image: url(./assets/pauseBtn.svg);";
     flag = true;
-  });
+  } else {
+    flag = false;
+    audio.pause();
+    this.style = "background-image: url(./assets/playBtn.svg);";
+  }
+});
 
-document
-  .querySelector(".songControll__nextBtn")
-  .addEventListener("click", function () {
-    if (currentIndexSong === songs.length - 1) return;
+prevBtn.addEventListener("click", function () {
+  if (currentIndexSong === 0) return;
+  currentIndexSong--;
+  songInfo(); 
+  audio.play();
+  playPauseBtn.style = "background-image: url(./assets/pauseBtn.svg);";
+  flag = true;
+});
 
-    currentIndexSong++;
-    artist.innerHTML = songs[currentIndexSong].artist;
-    songName.innerHTML = songs[currentIndexSong].songName;
-    songCover.style = songs[currentIndexSong].imgPath;
-    barTime.innerHTML = songs[currentIndexSong].duration;
-    audio.src = songs[currentIndexSong].path;
-    audio.play();
-    document.querySelector(".songControll__playPauseBtn").style =
-      "background-image: url(./assets/pauseBtn.svg);";
-    flag = true;
-  });
+nextBtn.addEventListener("click", function () {
+  if (currentIndexSong === songs.length - 1) return;
+  currentIndexSong++;
+  songInfo();
+  audio.play();
+  playPauseBtn.style = "background-image: url(./assets/pauseBtn.svg);";
+  flag = true;
+});
