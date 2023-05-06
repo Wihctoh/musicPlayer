@@ -30,6 +30,7 @@ body {
 }
 /* -------------------Song Data-----------------*/
 .songPlayer {
+  width: 310px;
   display: flex;
   flex-direction: column;
   row-gap: 23px;
@@ -69,9 +70,16 @@ body {
   gap: 16px;
 }
 .progressBar__line {
+  display: flex;
+  align-items: center;
   background-color: #dadada;
   width: 257px;
   height: 3px;
+}
+.progressBar__progress {
+  background-color: #8b0000;
+  width: 1px;
+  height: 2px;
 }
 .progressBar__time {
   font: 400 12px "Inter";
@@ -80,6 +88,7 @@ body {
 .songControll {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .songControll__repeatBtn {
   background-image: url(./assets/repeatBtn.svg);
@@ -116,8 +125,8 @@ body {
 }
 .songControll__favBtn {
   background-image: url(./assets/favBtn.svg);
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 18px;
   background-repeat: no-repeat;
   background-size: contain;
 }
