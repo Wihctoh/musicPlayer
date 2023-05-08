@@ -8,10 +8,10 @@ const prevBtn = document.querySelector(".songControll__prevBtn");
 const nextBtn = document.querySelector(".songControll__nextBtn");
 const favBtn = document.querySelector(".songControll__favBtn");
 const spotifyBtn = document.querySelector(".songHeader__spotifyBtn");
+const repeatBtn = document.querySelector(".songControll__repeatBtn");
 
 let flag = false;
 let currentIndexSong = 0;
-// duration: "05:48",
 
 const songs = [
   {
@@ -21,6 +21,7 @@ const songs = [
     songName: "Tears Dont Fall",
     imgPath: "background-image: url(./assets/bfmvCover.jpg)",
     duration: "00:20",
+    // duration: "05:48",
     liked: false,
   },
   {
@@ -43,31 +44,31 @@ const songs = [
   },
 ];
 
-function progressBar() {
-  const progress = document.querySelector(".progressBar__progress");
-  let minuts = 0;
-  let seconds = 0;
-  let count = 0;
+// function progressBar() {
+//   const progress = document.querySelector(".progressBar__progress");
+//   let minuts = 0;
+//   let seconds = 0;
+//   let count = 0;
 
-  let interval = setInterval(function () {
-    count++;
-    seconds++;
+//   let interval = setInterval(function () {
+//     count++;
+//     seconds++;
 
-    if (seconds >= "10") {
-      barTime.innerHTML = `0${minuts}:${seconds}`;
-    } else {
-      barTime.innerHTML = `0${minuts}:0${seconds}`;
-    }
+//     if (seconds >= "10") {
+//       barTime.innerHTML = `0${minuts}:${seconds}`;
+//     } else {
+//       barTime.innerHTML = `0${minuts}:0${seconds}`;
+//     }
 
-    if (seconds >= "60") {
-      minuts += 1;
-      seconds = 0;
-      barTime.innerHTML = `0${minuts}:0${seconds}`;
-    }
+//     if (seconds >= "60") {
+//       minuts += 1;
+//       seconds = 0;
+//       barTime.innerHTML = `0${minuts}:0${seconds}`;
+//     }
 
-    progress.style = `width: ${count}px`;
-  }, 1000);
-}
+//     progress.style = `width: ${count}px`;
+//   }, 1000);
+// }
 
 function songInfo() {
   const currentSong = songs[currentIndexSong];
@@ -76,7 +77,7 @@ function songInfo() {
   artist.innerHTML = currentSong.artist;
   songName.innerHTML = currentSong.songName;
   songCover.style = currentSong.imgPath;
-  // barTime.innerHTML = currentSong.duration;
+  barTime.innerHTML = currentSong.duration;
 
   if (currentSong.liked) {
     favBtn.style = "background-image: url(./assets/favBtnUsed.svg)";
@@ -91,6 +92,17 @@ function spotifyActive() {
   } else if (flag)
     spotifyBtn.style = "background-image: url(./assets/spotifyBtn.svg);";
 }
+
+repeatBtn.addEventListener("click", function () {
+  let style = getComputedStyle(repeatBtn).transform;
+
+  if (style === "none") {
+    this.style = "transition: 2s; transform: rotate(360deg)";
+  } else {
+    this.style.removeProperty("transition");
+    this.style.removeProperty("transform");
+  }
+});
 
 favBtn.addEventListener("click", function () {
   if (!songs[currentIndexSong].liked) {
@@ -108,7 +120,7 @@ playPauseBtn.addEventListener("click", function () {
   if (!flag) {
     spotifyActive();
     audio.play();
-    progressBar();
+    // progressBar();
 
     this.style = "background-image: url(./assets/pauseBtn.svg);";
     flag = true;
