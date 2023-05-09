@@ -76,11 +76,15 @@ body {
   background-color: #dadada;
   width: 257px;
   height: 3px;
+  border-radius: 5px;
 }
 .progressBar__progress {
+  display: flex;
+  align-items: center;
   background-color: #b45353;
   width: 1px;
-  height: 2px;
+  height: 3px;
+  border-radius: 5px;
 }
 .progressBar__time {
   font: 400 12px "Inter";

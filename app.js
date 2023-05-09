@@ -20,8 +20,7 @@ const songs = [
     artist: "Bullet for my Valentine",
     songName: "Tears Dont Fall",
     imgPath: "background-image: url(./assets/bfmvCover.jpg)",
-    duration: "00:20",
-    // duration: "05:48",
+    duration: "05:48",
     liked: false,
   },
   {
@@ -44,31 +43,46 @@ const songs = [
   },
 ];
 
-// function progressBar() {
-//   const progress = document.querySelector(".progressBar__progress");
-//   let minuts = 0;
-//   let seconds = 0;
-//   let count = 0;
+function progressBar() {
+  const progress = document.querySelector(".progressBar__progress");
+  const songTime = songs[currentIndexSong].duration.split(":");
+  let resTime = +songTime[0] * 60 + +songTime[1];
+  const durationSong = resTime;
 
-//   let interval = setInterval(function () {
-//     count++;
-//     seconds++;
+  let start = 0;
+  const finish = 257;
+  const duration = finish / durationSong;
 
-//     if (seconds >= "10") {
-//       barTime.innerHTML = `0${minuts}:${seconds}`;
-//     } else {
-//       barTime.innerHTML = `0${minuts}:0${seconds}`;
-//     }
+  const tickLine = setInterval(() => {
+    start += duration;
 
-//     if (seconds >= "60") {
-//       minuts += 1;
-//       seconds = 0;
-//       barTime.innerHTML = `0${minuts}:0${seconds}`;
-//     }
+    progress.style = `width: ${start}px`;
 
-//     progress.style = `width: ${count}px`;
-//   }, 1000);
-// }
+    if (start >= 257) clearInterval(tickLine);
+  }, 1000);
+}
+
+function progressBarTime() {
+  let seconds = 0;
+  let minuts = 0;
+
+  const tick = setInterval(() => {
+    seconds++;
+    if (seconds < 10) {
+      barTime.innerHTML = `0${minuts}:0${seconds}`;
+    } else barTime.innerHTML = `0${minuts}:${seconds}`;
+
+    if (seconds >= 60) {
+      seconds = 0;
+      barTime.innerHTML = `0${(minuts += 1)}:0${seconds}`;
+    }
+
+    if (barTime.innerHTML === songs[currentIndexSong].duration) {
+      audio.pause();
+      clearInterval(tick);
+    }
+  }, 1000);
+}
 
 function songInfo() {
   const currentSong = songs[currentIndexSong];
@@ -77,7 +91,9 @@ function songInfo() {
   artist.innerHTML = currentSong.artist;
   songName.innerHTML = currentSong.songName;
   songCover.style = currentSong.imgPath;
-  barTime.innerHTML = currentSong.duration;
+  spotifyActive();
+  progressBar();
+  progressBarTime();
 
   if (currentSong.liked) {
     favBtn.style = "background-image: url(./assets/favBtnUsed.svg)";
@@ -111,14 +127,11 @@ playPauseBtn.addEventListener("click", function () {
   songInfo();
 
   if (!flag) {
-    spotifyActive();
     audio.play();
-    progressBar();
 
-    this.style = "background-image: url(./assets/pauseBtn.svg);";
     flag = true;
+    this.style = "background-image: url(./assets/pauseBtn.svg);";
   } else {
-    spotifyActive();
     audio.pause();
 
     flag = false;
@@ -131,7 +144,6 @@ prevBtn.addEventListener("click", function () {
   currentIndexSong--;
 
   songInfo();
-  spotifyActive();
   audio.play();
 
   playPauseBtn.style = "background-image: url(./assets/pauseBtn.svg);";
@@ -145,7 +157,6 @@ nextBtn.addEventListener("click", function () {
   currentIndexSong++;
 
   songInfo();
-  spotifyActive();
   audio.play();
 
   playPauseBtn.style = "background-image: url(./assets/pauseBtn.svg);";
