@@ -93,15 +93,20 @@ function spotifyActive() {
     spotifyBtn.style = "background-image: url(./assets/spotifyBtn.svg);";
 }
 
-repeatBtn.addEventListener("click", function () {
-  let style = getComputedStyle(repeatBtn).transform;
+// repeatBtn.addEventListener("click", function () {
+//   let style = getComputedStyle(repeatBtn).transform;
 
-  if (style === "none") {
-    this.style = "transition: 2s; transform: rotate(360deg)";
-  } else {
-    this.style.removeProperty("transition");
-    this.style.removeProperty("transform");
-  }
+//   if (style === "none")
+//     this.style = "transition: 2s; transform: rotate(360deg)";
+
+//   setTimeout(function () {
+//     repeatBtn.style.removeProperty("transition");
+//     repeatBtn.style.removeProperty("transform");
+//   }, 2000);
+// });
+
+repeatBtn.addEventListener("click", function () {
+  this.style = "background-image: url(./assets/repeatSinglBtn.png);";
 });
 
 favBtn.addEventListener("click", function () {
