@@ -5,8 +5,9 @@
 }
 body {
   font-family: "Inter";
+  color: #fff;
   font-style: normal;
-  background-color: #454545;
+  background-color: #e5e5e5;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -17,7 +18,7 @@ body {
   margin: 0 auto;
   display: flex;
   gap: 32px;
-  background-color: #fffef8;
+  background-color: #000;
   border-radius: 15px;
 }
 .songImg {
@@ -50,11 +51,11 @@ body {
 }
 .songHeader__title {
   font: 700 18px "Inter";
-  color: black;
+  color: #fff;
 }
 .songHeader__name {
   font: 400 14px "Inter";
-  color: #454545;
+  color: #696969;
 }
 .songHeader__spotifyBtn {
   background-image: url(./assets/spotifyBtn.svg);
@@ -77,12 +78,13 @@ body {
   height: 3px;
 }
 .progressBar__progress {
-  background-color: #8b0000;
+  background-color: #b45353;
   width: 1px;
   height: 2px;
 }
 .progressBar__time {
   font: 400 12px "Inter";
+  color: #c1c1c1;
 }
 /* -------------------Song controll bar-----------------*/
 .songControll {
