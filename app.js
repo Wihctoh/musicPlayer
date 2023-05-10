@@ -9,9 +9,11 @@ const nextBtn = document.querySelector(".songControll__nextBtn");
 const favBtn = document.querySelector(".songControll__favBtn");
 const spotifyBtn = document.querySelector(".songHeader__spotifyBtn");
 const repeatBtn = document.querySelector(".songControll__repeatBtn");
+const volumeBtn = document.querySelector(".songControll__volumeBtn");
 
 let flag = false;
 let currentIndexSong = 0;
+let flagVolume = true;
 
 const songs = [
   {
@@ -83,6 +85,18 @@ function progressBarTime() {
     }
   }, 1000);
 }
+
+volumeBtn.addEventListener("click", function () {
+  if (flagVolume) {
+    this.style = "background-image: url(./assets/volumeOffBtn.svg);";
+    audio.volume = 0;
+    flagVolume = false;
+  } else if (!flagVolume) {
+    this.style = "background-image: url(./assets/volumeHightBtn.svg);";
+    audio.volume = 1;
+    flagVolume = true;
+  }
+});
 
 function songInfo() {
   const currentSong = songs[currentIndexSong];

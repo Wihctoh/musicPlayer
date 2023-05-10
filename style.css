@@ -103,6 +103,13 @@ body {
   background-repeat: no-repeat;
   background-size: contain;
 }
+.songControll__volumeBtn {
+  background-image: url(./assets/volumeHightBtn.svg);
+  width: 24px;
+  height: 24px;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
 /* -------------------controll panel-----------------*/
 .songControll-panel {
   display: flex;
