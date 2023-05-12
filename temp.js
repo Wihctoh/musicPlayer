@@ -1,14 +1,7 @@
 const audio = document.querySelector("audio");
-const artist = document.querySelector(".songHeader__title");
-const songName = document.querySelector(".songHeader__name");
-const songCover = document.querySelector(".songImg");
-const barTime = document.querySelector(".progressBar__time");
 const playPauseBtn = document.querySelector(".songControll__playPauseBtn");
-const prevBtn = document.querySelector(".songControll__prevBtn");
-const nextBtn = document.querySelector(".songControll__nextBtn");
 const favBtn = document.querySelector(".songControll__favBtn");
 const spotifyBtn = document.querySelector(".songHeader__spotifyBtn");
-const repeatBtn = document.querySelector(".songControll__repeatBtn");
 const volumeBtn = document.querySelector(".songControll__volumeBtn");
 
 let flag = false;
@@ -61,28 +54,22 @@ function songInfo() {
   const currentSong = songs[currentIndexSong];
 
   audio.src = currentSong.path;
-  artist.innerHTML = currentSong.artist;
-  songName.innerHTML = currentSong.songName;
-  songCover.style = currentSong.imgPath;
-  spotifyActive();
-
-  if (currentSong.liked) {
-    favBtn.style = "background-image: url(./assets/favBtnUsed.svg)";
-  } else if (!currentSong.liked) {
-    favBtn.style = "background-image: url(./assets/favBtn.svg)";
-  }
+  document.querySelector(".songHeader__title").innerHTML = currentSong.artist;
+  document.querySelector(".songHeader__name").innerHTML = currentSong.songName;
+  document.querySelector(".songImg").style = currentSong.imgPath;
+  spotifyBtn.style = flag
+    ? "background-image: url(./assets/spotifyBtn.svg);"
+    : "background-image: url(./assets/spotifyBtnActive.svg);";
+  favBtn.style = currentSong.liked
+    ? "background-image: url(./assets/favBtnUsed.svg)"
+    : "background-image: url(./assets/favBtn.svg)";
 }
 
-function spotifyActive() {
-  if (!flag) {
-    spotifyBtn.style = "background-image: url(./assets/spotifyBtnActive.svg);";
-  } else if (flag)
-    spotifyBtn.style = "background-image: url(./assets/spotifyBtn.svg);";
-}
-
-repeatBtn.addEventListener("click", function () {
-  this.style = "background-image: url(./assets/repeatSinglBtn.svg);";
-});
+document
+  .querySelector(".songControll__repeatBtn")
+  .addEventListener("click", function () {
+    this.style = "background-image: url(./assets/repeatSinglBtn.svg);";
+  });
 
 favBtn.addEventListener("click", function () {
   if (!songs[currentIndexSong].liked) {
@@ -108,31 +95,35 @@ playPauseBtn.addEventListener("click", function () {
   }
 });
 
-prevBtn.addEventListener("click", function () {
-  if (currentIndexSong === 0) return;
-  currentIndexSong--;
+document
+  .querySelector(".songControll__prevBtn")
+  .addEventListener("click", function () {
+    if (currentIndexSong === 0) return;
+    currentIndexSong--;
 
-  songInfo();
-  audio.play();
+    songInfo();
+    audio.play();
 
-  playPauseBtn.style = "background-image: url(./assets/pauseBtn.svg);";
-  spotifyBtn.style = "background-image: url(./assets/spotifyBtnActive.svg);";
+    playPauseBtn.style = "background-image: url(./assets/pauseBtn.svg);";
+    spotifyBtn.style = "background-image: url(./assets/spotifyBtnActive.svg);";
 
-  flag = true;
-});
+    flag = true;
+  });
 
-nextBtn.addEventListener("click", function () {
-  if (currentIndexSong === songs.length - 1) return;
-  currentIndexSong++;
+document
+  .querySelector(".songControll__nextBtn")
+  .addEventListener("click", function () {
+    if (currentIndexSong === songs.length - 1) return;
+    currentIndexSong++;
 
-  songInfo();
-  audio.play();
+    songInfo();
+    audio.play();
 
-  playPauseBtn.style = "background-image: url(./assets/pauseBtn.svg);";
-  spotifyBtn.style = "background-image: url(./assets/spotifyBtnActive.svg);";
+    playPauseBtn.style = "background-image: url(./assets/pauseBtn.svg);";
+    spotifyBtn.style = "background-image: url(./assets/spotifyBtnActive.svg);";
 
-  flag = true;
-});
+    flag = true;
+  });
 
 audio.addEventListener(`timeupdate`, function (event) {
   const progress = document.querySelector(".progressBar__progress");
