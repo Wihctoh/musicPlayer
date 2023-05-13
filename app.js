@@ -134,19 +134,17 @@ nextBtn.addEventListener("click", function () {
   flag = true;
 });
 
-audio.addEventListener(`timeupdate`, function (event) {
+audio.addEventListener("timeupdate", function (event) {
   const progress = document.querySelector(".progressBar__progress");
+  const { duration, currentTime } = audio;
 
-  const durationTime = event.target.duration;
-  const currentTime = event.target.currentTime;
-  const progressPercent = (currentTime / durationTime) * 100;
+  const progressPercent = (currentTime / duration) * 100;
   progress.style.width = `${progressPercent}%`;
-
-  const timeMin = Math.floor(this.currentTime / 60);
-  const timeSec = Math.floor(this.currentTime % 60);
-
-  const min = timeMin < 10 ? `0${timeMin}` : `${timeMin}`;
-  const sec = timeSec < 10 ? `0${timeSec}` : `${timeSec}`;
-
-  document.querySelector(".progressBar__time").innerHTML = `${min}:${sec}`;
 });
+
+document
+  .querySelector(".progressBar__line")
+  .addEventListener("click", function (event) {
+    console.log(this.clientWidth);
+    console.log(event.offsetX);
+  });
