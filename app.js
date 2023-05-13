@@ -50,7 +50,7 @@ document
       flagVolume = true;
     }
   });
-
+// ---------------------song informations------------------------------
 function songInfo() {
   const currentSong = songs[currentIndexSong];
 
@@ -101,8 +101,9 @@ playPauseBtn.addEventListener("click", function () {
 document
   .querySelector(".songControll__prevBtn")
   .addEventListener("click", function () {
-    if (currentIndexSong === 0) return;
     currentIndexSong--;
+
+    if (currentIndexSong < 0) currentIndexSong = songs.length - 1;
 
     songInfo();
     audio.play();
@@ -116,8 +117,9 @@ document
 document
   .querySelector(".songControll__nextBtn")
   .addEventListener("click", function () {
-    if (currentIndexSong === songs.length - 1) return;
     currentIndexSong++;
+
+    if (currentIndexSong > songs.length - 1) currentIndexSong = 0;
 
     songInfo();
     audio.play();
