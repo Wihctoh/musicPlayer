@@ -1,20 +1,12 @@
 const audio = document.querySelector("audio");
-const artist = document.querySelector(".songHeader__title");
-const songName = document.querySelector(".songHeader__name");
-const songCover = document.querySelector(".songImg");
-const barTime = document.querySelector(".progressBar__time");
 const playPauseBtn = document.querySelector(".songControll__playPauseBtn");
-const prevBtn = document.querySelector(".songControll__prevBtn");
-const nextBtn = document.querySelector(".songControll__nextBtn");
 const favBtn = document.querySelector(".songControll__favBtn");
 const spotifyBtn = document.querySelector(".songHeader__spotifyBtn");
-const repeatBtn = document.querySelector(".songControll__repeatBtn");
-const volumeBtn = document.querySelector(".songControll__volumeBtn");
 
 let flag = false;
-let currentIndexSong = 0;
 let flagVolume = true;
-
+let currentIndexSong = 0;
+// ---------------------songList------------------------------
 const songs = [
   {
     id: 1,
@@ -44,46 +36,44 @@ const songs = [
     liked: false,
   },
 ];
-
-volumeBtn.addEventListener("click", function () {
-  if (flagVolume) {
-    this.style = "background-image: url(./assets/volumeOffBtn.svg);";
-    audio.volume = 0;
-    flagVolume = false;
-  } else {
-    this.style = "background-image: url(./assets/volumeHightBtn.svg);";
-    audio.volume = 1;
-    flagVolume = true;
-  }
-});
+// ---------------------volume controll------------------------------
+document
+  .querySelector(".songControll__volumeBtn")
+  .addEventListener("click", function () {
+    if (flagVolume) {
+      this.style = "background-image: url(./assets/volumeOffBtn.svg);";
+      audio.volume = 0.1;
+      flagVolume = false;
+    } else {
+      this.style = "background-image: url(./assets/volumeHightBtn.svg);";
+      audio.volume = 1;
+      flagVolume = true;
+    }
+  });
 
 function songInfo() {
   const currentSong = songs[currentIndexSong];
 
   audio.src = currentSong.path;
-  artist.innerHTML = currentSong.artist;
-  songName.innerHTML = currentSong.songName;
-  songCover.style = currentSong.imgPath;
-  spotifyActive();
+  document.querySelector(".songHeader__title").innerHTML = currentSong.artist;
+  document.querySelector(".songHeader__name").innerHTML = currentSong.songName;
+  document.querySelector(".songImg").style = currentSong.imgPath;
 
-  if (currentSong.liked) {
-    favBtn.style = "background-image: url(./assets/favBtnUsed.svg)";
-  } else if (!currentSong.liked) {
-    favBtn.style = "background-image: url(./assets/favBtn.svg)";
-  }
+  favBtn.style = currentSong.liked
+    ? "background-image: url(./assets/favBtnUsed.svg)"
+    : "background-image: url(./assets/favBtn.svg)";
+
+  spotifyBtn.style = flag
+    ? "background-image: url(./assets/spotifyBtn.svg);"
+    : "background-image: url(./assets/spotifyBtnActive.svg);";
 }
-
-function spotifyActive() {
-  if (!flag) {
-    spotifyBtn.style = "background-image: url(./assets/spotifyBtnActive.svg);";
-  } else if (flag)
-    spotifyBtn.style = "background-image: url(./assets/spotifyBtn.svg);";
-}
-
-repeatBtn.addEventListener("click", function () {
-  this.style = "background-image: url(./assets/repeatSinglBtn.svg);";
-});
-
+// ---------------------repeatSingle/randomRepeat button------------------------------
+document
+  .querySelector(".songControll__repeatBtn")
+  .addEventListener("click", function () {
+    this.style = "background-image: url(./assets/repeatSinglBtn.svg);";
+  });
+// ---------------------favorite button------------------------------
 favBtn.addEventListener("click", function () {
   if (!songs[currentIndexSong].liked) {
     favBtn.style = "background-image: url(./assets/favBtnUsed.svg)";
@@ -93,7 +83,7 @@ favBtn.addEventListener("click", function () {
     songs[currentIndexSong].liked = false;
   }
 });
-
+// ---------------------play/pause button------------------------------
 playPauseBtn.addEventListener("click", function () {
   songInfo();
 
@@ -107,44 +97,57 @@ playPauseBtn.addEventListener("click", function () {
     this.style = "background-image: url(./assets/playBtn.svg);";
   }
 });
+// ---------------------prev song button------------------------------
+document
+  .querySelector(".songControll__prevBtn")
+  .addEventListener("click", function () {
+    if (currentIndexSong === 0) return;
+    currentIndexSong--;
 
-prevBtn.addEventListener("click", function () {
-  if (currentIndexSong === 0) return;
-  currentIndexSong--;
+    songInfo();
+    audio.play();
 
-  songInfo();
-  audio.play();
+    playPauseBtn.style = "background-image: url(./assets/pauseBtn.svg);";
+    spotifyBtn.style = "background-image: url(./assets/spotifyBtnActive.svg);";
 
-  playPauseBtn.style = "background-image: url(./assets/pauseBtn.svg);";
-  spotifyBtn.style = "background-image: url(./assets/spotifyBtnActive.svg);";
+    flag = true;
+  });
+// ---------------------next song button------------------------------
+document
+  .querySelector(".songControll__nextBtn")
+  .addEventListener("click", function () {
+    if (currentIndexSong === songs.length - 1) return;
+    currentIndexSong++;
 
-  flag = true;
-});
+    songInfo();
+    audio.play();
 
-nextBtn.addEventListener("click", function () {
-  if (currentIndexSong === songs.length - 1) return;
-  currentIndexSong++;
+    playPauseBtn.style = "background-image: url(./assets/pauseBtn.svg);";
+    spotifyBtn.style = "background-image: url(./assets/spotifyBtnActive.svg);";
 
-  songInfo();
-  audio.play();
-
-  playPauseBtn.style = "background-image: url(./assets/pauseBtn.svg);";
-  spotifyBtn.style = "background-image: url(./assets/spotifyBtnActive.svg);";
-
-  flag = true;
-});
-
-audio.addEventListener("timeupdate", function (event) {
+    flag = true;
+  });
+// ---------------------song timer------------------------------
+audio.addEventListener("timeupdate", function () {
   const progress = document.querySelector(".progressBar__progress");
   const { duration, currentTime } = audio;
 
   const progressPercent = (currentTime / duration) * 100;
   progress.style.width = `${progressPercent}%`;
-});
 
+  const timeMin = Math.trunc(currentTime / 60);
+  const timeSec = Math.trunc(currentTime % 60);
+
+  const min = timeMin < 10 ? `0${timeMin}` : `${timeMin}`;
+  const sec = timeSec < 10 ? `0${timeSec}` : `${timeSec}`;
+  document.querySelector(".progressBar__time").innerHTML = `${min}:${sec}`;
+});
+// ---------------------song rewind------------------------------
 document
   .querySelector(".progressBar__line")
   .addEventListener("click", function (event) {
-    console.log(this.clientWidth);
-    console.log(event.offsetX);
+    const width = this.clientWidth;
+    const clickPlace = event.offsetX;
+
+    audio.currentTime = (clickPlace / width) * audio.duration;
   });
