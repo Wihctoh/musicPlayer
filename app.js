@@ -42,7 +42,7 @@ document
   .addEventListener("click", function () {
     if (flagVolume) {
       this.style = "background-image: url(./assets/volumeOffBtn.svg);";
-      audio.volume = 0.1;
+      audio.volume = 0;
       flagVolume = false;
     } else {
       this.style = "background-image: url(./assets/volumeHightBtn.svg);";
@@ -132,10 +132,12 @@ document
 // ---------------------song timer------------------------------
 audio.addEventListener("timeupdate", function () {
   const progress = document.querySelector(".progressBar__progress");
-  const { duration, currentTime } = audio;
+  const progressBall = document.querySelector(".progressBar__progress-ball");
+  const { duration, currentTime } = this;
 
   const progressPercent = (currentTime / duration) * 100;
   progress.style.width = `${progressPercent}%`;
+  progressBall.style = `padding-left:${progressPercent}`;
 
   const timeMin = Math.trunc(currentTime / 60);
   const timeSec = Math.trunc(currentTime % 60);

@@ -86,6 +86,13 @@ body {
   height: 3px;
   border-radius: 5px;
 }
+.progressBar__progress-ball {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #b45353;
+  border: 1px solid #dadada;
+}
 .progressBar__time {
   font: 400 12px "Inter";
   color: #c1c1c1;
