@@ -135,7 +135,7 @@ document
 
     flag = true;
   });
-// ---------------------song timer------------------------------
+// ---------------------songTimer/progressBar------------------------------
 audio.addEventListener("timeupdate", function () {
   const progress = document.querySelector(".progressBar__progress");
   const progressBall = document.querySelector(".progressBar__progress-ball");
