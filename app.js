@@ -6,6 +6,8 @@ const spotifyBtn = document.querySelector(".songHeader__spotifyBtn");
 let flag = false;
 let flagVolume = true;
 let currentIndexSong = 0;
+let currentTimeSong = 0;
+
 // ---------------------songList------------------------------
 const songs = [
   {
@@ -89,10 +91,14 @@ playPauseBtn.addEventListener("click", function () {
 
   if (!flag) {
     audio.play();
+
+    audio.currentTime = currentTimeSong;
     flag = true;
     this.style = "background-image: url(./assets/pauseBtn.svg);";
   } else {
     audio.pause();
+
+    audio.currentTime = currentTimeSong;
     flag = false;
     this.style = "background-image: url(./assets/playBtn.svg);";
   }
@@ -145,6 +151,8 @@ audio.addEventListener("timeupdate", function () {
   const min = timeMin < 10 ? `0${timeMin}` : `${timeMin}`;
   const sec = timeSec < 10 ? `0${timeSec}` : `${timeSec}`;
   document.querySelector(".progressBar__time").innerHTML = `${min}:${sec}`;
+
+  currentTimeSong = currentTime;
 });
 // ---------------------song rewind------------------------------
 document
