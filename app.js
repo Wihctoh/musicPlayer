@@ -16,7 +16,6 @@ const songs = [
     artist: "Bullet for my Valentine",
     songName: "Tears Dont Fall",
     imgPath: "background-image: url(./assets/bfmvCover.jpg)",
-    duration: "05:48",
     liked: false,
   },
   {
@@ -25,7 +24,6 @@ const songs = [
     artist: "Bring Me The Horizon",
     songName: "Parasite Eve",
     imgPath: "background-image: url(./assets/bmthCover.jpg)",
-    duration: "04:51",
     liked: false,
   },
   {
@@ -34,11 +32,10 @@ const songs = [
     artist: "System of a Down",
     songName: "Chop Suey!",
     imgPath: "background-image: url(./assets/soadCover.jpg)",
-    duration: "03:30",
     liked: false,
   },
 ];
-// ---------------------volume controll------------------------------
+// ---------------------volume-controll------------------------------
 document
   .querySelector(".songControll__volumeBtn")
   .addEventListener("click", function () {
@@ -52,7 +49,7 @@ document
       flagVolume = true;
     }
   });
-// ---------------------song informations------------------------------
+// ---------------------song-informations------------------------------
 function songInfo() {
   const currentSong = songs[currentIndexSong];
 
@@ -69,13 +66,13 @@ function songInfo() {
     ? "background-image: url(./assets/spotifyBtn.svg);"
     : "background-image: url(./assets/spotifyBtnActive.svg);";
 }
-// ---------------------repeatSingle/randomRepeat button------------------------------
+// ---------------------repeatSingle/randomRepeat-button------------------------------
 document
   .querySelector(".songControll__repeatBtn")
   .addEventListener("click", function () {
     this.style = "background-image: url(./assets/repeatSinglBtn.svg);";
   });
-// ---------------------favorite button------------------------------
+// ---------------------favorite-button------------------------------
 favBtn.addEventListener("click", function () {
   if (!songs[currentIndexSong].liked) {
     favBtn.style = "background-image: url(./assets/favBtnUsed.svg)";
@@ -85,25 +82,25 @@ favBtn.addEventListener("click", function () {
     songs[currentIndexSong].liked = false;
   }
 });
-// ---------------------play/pause button------------------------------
+// ---------------------play/pause-button------------------------------
 playPauseBtn.addEventListener("click", function () {
   songInfo();
 
   if (!flag) {
     audio.play();
 
-    audio.currentTime = currentTimeSong;
     flag = true;
+    audio.currentTime = currentTimeSong;
     this.style = "background-image: url(./assets/pauseBtn.svg);";
   } else {
     audio.pause();
 
-    audio.currentTime = currentTimeSong;
     flag = false;
+    audio.currentTime = currentTimeSong;
     this.style = "background-image: url(./assets/playBtn.svg);";
   }
 });
-// ---------------------prev song button------------------------------
+// ---------------------prev-song-button------------------------------
 document
   .querySelector(".songControll__prevBtn")
   .addEventListener("click", function () {
@@ -119,7 +116,7 @@ document
 
     flag = true;
   });
-// ---------------------next song button------------------------------
+// ---------------------next-song-button------------------------------
 document
   .querySelector(".songControll__nextBtn")
   .addEventListener("click", function () {
@@ -152,7 +149,7 @@ audio.addEventListener("timeupdate", function () {
 
   currentTimeSong = currentTime;
 });
-// ---------------------song rewind------------------------------
+// ---------------------song-rewind------------------------------
 document
   .querySelector(".progressBar__line")
   .addEventListener("click", function (event) {
