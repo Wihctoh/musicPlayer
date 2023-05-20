@@ -138,12 +138,10 @@ document
 // ---------------------songTimer/progressBar------------------------------
 audio.addEventListener("timeupdate", function () {
   const progress = document.querySelector(".progressBar__progress");
-  const progressBall = document.querySelector(".progressBar__progress-ball");
   const { duration, currentTime } = this;
 
   const progressPercent = (currentTime / duration) * 100;
   progress.style.width = `${progressPercent}%`;
-  progressBall.style = `padding-left:${progressPercent}`;
 
   const timeMin = Math.trunc(currentTime / 60);
   const timeSec = Math.trunc(currentTime % 60);
