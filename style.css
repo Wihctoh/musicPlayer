@@ -82,7 +82,7 @@ body {
   display: flex;
   align-items: center;
   background-color: #b45353;
-  width: 1px;
+  width: 0;
   height: 3px;
   border-radius: 5px;
 }

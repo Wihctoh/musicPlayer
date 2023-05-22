@@ -1,12 +1,14 @@
 const audio = document.querySelector("audio");
 const playPauseBtn = document.querySelector(".songControll__playPauseBtn");
-const favBtn = document.querySelector(".songControll__favBtn");
 const spotifyBtn = document.querySelector(".songHeader__spotifyBtn");
+const repeatBtn = document.querySelector(".songControll__repeatBtn");
+const favBtn = document.querySelector(".songControll__favBtn");
 
 let flag = false;
 let flagVolume = true;
 let currentIndexSong = 0;
 let currentTimeSong = 0;
+let repeatSingleSong = false;
 
 // ---------------------songList------------------------------
 const songs = [
@@ -67,11 +69,26 @@ function songInfo() {
     : "background-image: url(./assets/spotifyBtnActive.svg);";
 }
 // ---------------------repeatSingle/randomRepeat-button------------------------------
-document
-  .querySelector(".songControll__repeatBtn")
-  .addEventListener("click", function () {
+repeatBtn.addEventListener("click", function () {
+  if (!repeatSingleSong) {
     this.style = "background-image: url(./assets/repeatSinglBtn.svg);";
-  });
+    repeatSingleSong = true;
+  } else {
+    this.style = "background-image: url(./assets/repeatBtn.svg);";
+    repeatSingleSong = false;
+  }
+});
+
+audio.addEventListener("ended", function () {
+  if (repeatSingleSong) {
+    songInfo();
+    this.play();
+
+    spotifyBtn.style = "background-image: url(./assets/spotifyBtnActive.svg);";
+  } else {
+    nextSong();
+  }
+});
 // ---------------------favorite-button------------------------------
 favBtn.addEventListener("click", function () {
   if (!songs[currentIndexSong].liked) {
@@ -117,21 +134,23 @@ document
     flag = true;
   });
 // ---------------------next-song-button------------------------------
+function nextSong() {
+  currentIndexSong++;
+
+  if (currentIndexSong > songs.length - 1) currentIndexSong = 0;
+
+  songInfo();
+  audio.play();
+
+  playPauseBtn.style = "background-image: url(./assets/pauseBtn.svg);";
+  spotifyBtn.style = "background-image: url(./assets/spotifyBtnActive.svg);";
+
+  flag = true;
+}
+
 document
   .querySelector(".songControll__nextBtn")
-  .addEventListener("click", function () {
-    currentIndexSong++;
-
-    if (currentIndexSong > songs.length - 1) currentIndexSong = 0;
-
-    songInfo();
-    audio.play();
-
-    playPauseBtn.style = "background-image: url(./assets/pauseBtn.svg);";
-    spotifyBtn.style = "background-image: url(./assets/spotifyBtnActive.svg);";
-
-    flag = true;
-  });
+  .addEventListener("click", nextSong);
 // ---------------------songTimer/progressBar------------------------------
 audio.addEventListener("timeupdate", function () {
   const progress = document.querySelector(".progressBar__progress");
